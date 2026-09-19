@@ -11,8 +11,8 @@ return {
   },
 
   -- == Кастомизация интерфейса ==
-  
-{
+
+  {
     "folke/snacks.nvim",
     opts = {
       dashboard = {
@@ -47,20 +47,17 @@ return {
     config = function(plugin, opts)
       local npairs = require "nvim-autopairs"
       npairs.setup(opts) -- Безопасный вызов вместо старого API astronvim
-      
+
       local Rule = require "nvim-autopairs.rule"
       local cond = require "nvim-autopairs.conds"
-      npairs.add_rules(
-        {
-          Rule("$", "$", { "tex", "latex" })
-            :with_pair(cond.not_after_regex "%%")
-            :with_pair(cond.not_before_regex("xxx", 3))
-            :with_move(cond.none())
-            :with_del(cond.not_after_regex "xx")
-            :with_cr(cond.none()),
-        },
-        Rule("a", "a", "-vim")
-      )
+      npairs.add_rules({
+        Rule("$", "$", { "tex", "latex" })
+          :with_pair(cond.not_after_regex "%%")
+          :with_pair(cond.not_before_regex("xxx", 3))
+          :with_move(cond.none())
+          :with_del(cond.not_after_regex "xx")
+          :with_cr(cond.none()),
+      }, Rule("a", "a", "-vim"))
     end,
   },
 
@@ -79,23 +76,12 @@ return {
     end,
   },
 
-  -- == Мультикурсоры ==
+  -- == Move line up/down ==
   {
-    "smoka7/multicursors.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "nvimtools/hydra.nvim",
-    },
+    "nvim-mini/mini.move",
+    version = false,
+    event = "User AstroFile",
     opts = {},
-    cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
-    keys = {
-      {
-        mode = { "v", "n" },
-        "<Leader>m",
-        "<cmd>MCstart<cr>",
-        desc = "Create a selection for selected text or word under the cursor",
-      },
-    },
   },
 
   -- == Zen Mode ==
