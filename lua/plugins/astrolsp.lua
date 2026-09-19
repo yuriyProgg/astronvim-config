@@ -1,4 +1,3 @@
-
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
@@ -19,7 +18,7 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enable = true
+        enable = true,
       },
       disabled = { -- disable formatting capabilities for the listed language servers
         -- disable lua_ls formatting capability if you want to use StyLua to format your lua code
@@ -37,13 +36,13 @@ return {
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
-      clangd = { 
+      clangd = {
         capabilities = { offsetEncoding = "utf-8" }, -- Защита от варнингов кодировки в некоторых плагинах
         cmd = {
           "clangd",
-          "--background-index",       -- Фоновое индексирование проекта
-          "--clang-tidy",             -- Включение статического анализатора clang-tidy
-          "--header-insertion=never",  -- Отключение автодобавления лишних #include при автодополнении
+          "--background-index", -- Фоновое индексирование проекта
+          "--clang-tidy", -- Включение статического анализатора clang-tidy
+          -- "--header-insertion=never", -- Отключение автодобавления лишних #include при автодополнении
           -- "--experimental-modules-support", -- Раскомментируйте, если будете использовать 'import std;'
         },
       },
